@@ -20,7 +20,7 @@ const userSchema = new Schema({
         required: [true, 'Password is required'],
         trim: true,
     },
-    refreshToken: String
+    refreshToken: [String]
 });
 
 const User = mongoose.model('User', userSchema);
