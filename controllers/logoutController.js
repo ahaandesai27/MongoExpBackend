@@ -1,26 +1,22 @@
-const fsPromises = require('fs').promises;
-const { appendFileSync } = require('fs');
-const path = require('path');
-
-//set usersDB.users to the users array in users.json
-const usersDB = {
-    users: require('../models/users'),
-    setUsers: function (users) { this.users = users; }
-} 
+const User = require('../models/User');
+ 
 const handleLogout = async (req, res) => {
     // Note for Frontend: on client also delete the access token
     const cookies = req.cookies;
     if(!cookies?.jwt) return res.sendStatus(204); //No content
     const refreshToken = cookies.jwt;
     //Is refreshToken in DB?
-    const foundUser = usersDB.users.find(user => user.refreshToken === refreshToken);
+    const foundUser = await User.findOne({refreshToken}).exec();
     if(!foundUser) { //no user but cookie exists
         res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure:true});
         return res.sendStatus(204);
     }
+    //delete refreshToken from DB
     foundUser.refreshToken = null;
-    usersDB.setUsers(usersDB.users);
-    await fsPromises.writeFile(path.join(__dirname, '../models/users.json'), JSON.stringify(usersDB.users))
+    const result = await foundUser.save();
+    console.log(result);
+    if(!result) return res.sendStatus(500);
+
     res.clearCookie('jwt', {httpOnly: true, sameSite:'None', secure:true});
     res.sendStatus(204);
 }

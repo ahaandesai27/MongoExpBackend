@@ -1,66 +1,78 @@
-const fs = require('fs');
-const filePath = `/home/shaun/Documents/JPMC/express_intro/models/employees.json`;
-const data = fs.readFileSync(filePath, 'utf-8');
-const employeeList = JSON.parse(data);
+const Employee = require('../models/Employee');
 
 //get all employees
-const getAllEmployees = (req, res) => {
-    res.json(employeeList);
+const getAllEmployees = async (req, res) => {
+    const employees = await Employee.find();
+    if(!employees) {
+        res.status(204).json({error: 'No employees found'});
+    }
+    res.json(employees);
 }
 //create new ID and add to list
 const createNewEmployee = async (req, res) => {
-    const newEmployee = {
-        id: employeeList.length + 1,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname
-    }
-    if(!newEmployee.firstname || !newEmployee.lastname) {
+    if(!req?.body.firstname || !req?.body.lastname) {
         res.status(400).json({error: 'Please include both first and last name'});
     }
-
-    employeeList.push(newEmployee);
-    const modifiedData = JSON.stringify(employeeList);
-    await fs.writeFileSync(filePath, modifiedData, 'utf-8');
-    res.status(201).json(employeeList);
+    try {
+        console.log(req.body.firstName);
+        console.log(req.body.lastName);
+        const newEmployee = new Employee({
+            firstName: req.body.firstname,
+            lastName: req.body.lastname
+        });
+        console.log(newEmployee);
+        const result = await newEmployee.save();
+        console.log(result)
+        res.status(201).json(result);
+    }
+    catch(err) {
+        res.status(500).json({error: err});
+    }
 }
 //find by ID and update
 const updateEmployee = async (req, res) => {
+    if(!req?.params?.id) {
+        res.status(400).json({error: 'Please include employee ID'});
+    }
     const id = req.params.id;
-    const employee = employeeList.find((employee) => employee.id === parseInt(id));
+    const employee = await Employee.findOne({_id: id}).exec();
     if(!employee) {
-        res.status(400).json({error: 'Employee not found'});
+        res.status(204).json({error: `No employee with id ${id}`});
     } else {
-        if(req.body.firstname) {
-            employee.firstname = req.body.firstname;
+        if(req.body?.firstName) {
+            employee.firstName = req.body.firstName;
         }
-        if(req.body.lastname) {
-            employee.lastname = req.body.lastname;
+        if(req.body?.lastName) {
+            employee.lastName = req.body.lastName;
         }
-        const modifiedData = JSON.stringify(employeeList);
-        await fs.writeFileSync(filePath, modifiedData, 'utf-8');
-        res.json(employeeList);
+        const result = await employee.save();
+        console.log(result);
+        res.json(result);
     }
 }
 //find by ID and delete
 const deleteEmployee = async (req, res) => {
-    const id = req.params.id;
-    const employee = employeeList.find((employee) => employee.id === parseInt(id));
-    if(!employee) {
-        res.status(400).json({error: 'Employee not found'});
-    } else {
-        const index = employeeList.indexOf(employee);
-        employeeList.splice(index, 1);
-        const modifiedData = JSON.stringify(employeeList);
-        await fs.writeFileSync(filePath, modifiedData, 'utf-8');
-        res.json(employeeList);
+    if(!req?.params?.id) {
+        res.status(400).json({error: 'Please include employee ID'});
     }
-}
+    const id = req.params.id;
+    const employee = await Employee.findOne({_id: id}).exec();
+    if(!employee) {
+        res.status(204).json({error: `No employee with id ${id}`});
+    } else {
+        const result = await employee.deleteOne({_id: id});
+        res.json(result);
+    }
+}   
 //find by ID and return
 const getEmployeeById = async (req, res) => {
+    if(!req?.params?.id) {
+        res.status(400).json({error: 'Please include employee ID'});
+    } 
     const id = req.params.id;
-    const employee = employeeList.find((employee) => employee.id === parseInt(id));
+    const employee = await Employee.findOne({_id: id}).exec();
     if(!employee) {
-        res.status(404).json({error: 'Employee not found'});
+        res.status(204).json({error: `No employee with id ${id}`});
     } else {
         res.json(employee);
     }
