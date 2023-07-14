@@ -35,3 +35,12 @@
 20230714	14:49:27	b92c4aba-1d42-4dcc-b40f-d9a092e19bce	POST	undefined	/api/employees	::ffff:127.0.0.1
 20230714	15:02:57	d86e7639-a7e4-4157-b0ae-2b05b10bfca2	POST	undefined	/api/employees	::ffff:127.0.0.1
 20230714	15:03:51	47d75f62-dac0-45be-b68d-8879b2ab2ef5	GET	undefined	/api/employees/1	::ffff:127.0.0.1
+20230714	15:16:19	f18a3ba6-ee31-44e6-81ff-f552b653d968	GET	undefined	/api/employees	::ffff:127.0.0.1
+20230714	15:26:48	58daf7d7-4e87-4e43-be67-81e367764e64	GET	undefined	/api/employees	::ffff:127.0.0.1
+20230714	15:26:52	828c3da2-d4f0-4412-b868-5f741f9e6aed	GET	undefined	/api/employees/1	::ffff:127.0.0.1
+20230714	15:26:54	4c870014-bd34-44a1-b60f-e1ed0c10b265	GET	undefined	/api/employees/2	::ffff:127.0.0.1
+20230714	15:27:05	d3b677d0-3d4c-4bf2-aaf6-3d9f7f5b5973	POST	undefined	/api/employees	::ffff:127.0.0.1
+20230714	15:28:39	277c0ce4-1d3f-49bf-9549-890fc9f40148	GET	undefined	/api/employees/1	::ffff:127.0.0.1
+20230714	15:28:43	b577df54-ae6f-461f-8d45-441f118cd522	PUT	undefined	/api/employees/1	::ffff:127.0.0.1
+20230714	15:30:20	6f94ce99-834e-4413-9f18-7775ee60a463	PUT	undefined	/api/employees/1	::ffff:127.0.0.1
+20230714	15:30:26	aa4918c0-2230-4dc2-b751-5c31fb58c25d	PUT	undefined	/api/employees/1	::ffff:127.0.0.1
