@@ -1,1 +1,6 @@
 20230714	14:11:56	cbadf03d-7a3c-4f56-90f1-f80fc9bc3a6f	Error:Not allowed by CORS
+20230714	17:32:27	4f32840d-e191-490a-858c-888fe87359ab	Error:Cannot set headers after they are sent to the client
+20230714	17:33:02	55d85d47-ec2d-48ef-b167-4c29d045efac	Error:Cannot set headers after they are sent to the client
+20230714	18:24:02	11b4344e-e9a2-413b-8213-eac6a4e09f09	TypeError:Cannot read properties of undefined (reading 'username')
+20230714	18:24:02	54bb10de-da88-4907-b3be-ec01ce12f566	TypeError:Cannot read properties of undefined (reading 'username')
+20230714	18:24:03	239a3b13-47ce-4d13-a2ff-762408e77f65	TypeError:Cannot read properties of undefined (reading 'username')

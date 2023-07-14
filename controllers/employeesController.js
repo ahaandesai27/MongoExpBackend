@@ -1,5 +1,5 @@
 const fs = require('fs');
-const filePath = `/home/shaun/Documents/JPMC/express_intro/data/employees.json`;
+const filePath = `/home/shaun/Documents/JPMC/express_intro/models/employees.json`;
 const data = fs.readFileSync(filePath, 'utf-8');
 const employeeList = JSON.parse(data);
 
