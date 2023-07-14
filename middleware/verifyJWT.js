@@ -3,8 +3,8 @@ require('dotenv').config();
 
 const verifyJWT = (req, res, next) => {
     //check for access token in header
-    const authHeader = req.headers['authorization']
-    if(!authHeader) {
+    const authHeader = req.headers.authorization||req.headers.Authorization;
+    if(!authHeader?.startsWith('Bearer ')) {
         res.status(401).send('Access denied, token missing');
         return;
     }
@@ -18,7 +18,8 @@ const verifyJWT = (req, res, next) => {
             if(err) {
                 res.status(403).send('Invalid token');
             }
-            req.user = decoded.username;
+            req.user = decoded.userInfo.username;
+            req.roles = decoded.userInfo.roles;
             next();
     });
 }

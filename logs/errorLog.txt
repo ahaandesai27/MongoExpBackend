@@ -4,3 +4,4 @@
 20230714	18:24:02	11b4344e-e9a2-413b-8213-eac6a4e09f09	TypeError:Cannot read properties of undefined (reading 'username')
 20230714	18:24:02	54bb10de-da88-4907-b3be-ec01ce12f566	TypeError:Cannot read properties of undefined (reading 'username')
 20230714	18:24:03	239a3b13-47ce-4d13-a2ff-762408e77f65	TypeError:Cannot read properties of undefined (reading 'username')
+20230714	19:17:04	c98c648a-b39d-4266-8cbf-749265fbecb4	TypeError:Cannot read properties of undefined (reading 'userInfo')
