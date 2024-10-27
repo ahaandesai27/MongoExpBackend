@@ -31,7 +31,6 @@ app.use('/',express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 
 //routes
-app.use('/', require('./routes/root'));
 app.use('/register', require('./routes/register'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
@@ -42,9 +41,7 @@ app.use('/api/employees', require('./routes/api/employees'));
 // Nothing found
 app.all('*', (req, res) => {
     res.status(404);
-    if(req.accepts('html')) {
-        res.sendFile(path.join(__dirname, 'views', '404.html'));
-    } else if(req.accepts('json')) {
+    if(req.accepts('json')) {
         res.json({error: 'Not found'});
     } else {
         res.type('txt').send('Not found');
